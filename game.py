@@ -1,6 +1,5 @@
 import ast
 from sys import argv
-#file_path = "./test_data/test_game.map"
 
 def read_data(file_path):
     " Reads the data form the file path "
@@ -53,6 +52,7 @@ def play(data,player,current_position,inventry,action):
     elif action[0] == "exit":
         game_over = True
         next_position = current_position
+        print("Game Over")
     elif action[0] == "take":
         object = action[1]
         inventry = get_object(data,object,current_position,inventry)
@@ -101,6 +101,9 @@ def get_object(data,object,current_position,inventry):
 
 def user_input():
     command = input(">>>> ")
+    if not command.split():
+        print("Enter wrong command")
+        command = user_input()
     return command
 
 def user_action(data,player,current_position,inventry,command):
@@ -120,7 +123,7 @@ def user_action(data,player,current_position,inventry,command):
         action = user_action(data,player,current_position,inventry,command)
     return action
 
-def main():
+if __name__=='__main__':
     script, file_path = argv
     
     data = read_data(file_path)
@@ -135,9 +138,12 @@ def main():
 
     game_over = False
     while not game_over:
-        action = user_input().split()
+        command = user_input()
+        action = user_action(data,player,current_position,inventry,command)
         
         game_over,next_position = play(data,player,current_position,inventry,action)
         
         current_position = next_position
-#main()
+        
+
+    
