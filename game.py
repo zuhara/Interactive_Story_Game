@@ -91,8 +91,7 @@ Your Inventry : {}
     return status_msg
 
 def get_object(data,object,current_position,inventry):
-    " Returns the appended inventry 
-"
+    " Returns the appended inventry "
     available_objects = available_objects_in_room(data,current_position,inventry)
     if object in available_objects:
         inventry.append(object)
@@ -103,6 +102,10 @@ def get_object(data,object,current_position,inventry):
 def user_input():
     command = input(">>>> ")
     return command
+
+def user_action(data,player,current_position,inventry,command):
+    " Splits the user command and filters it "
+    return ['exit']
 
 def main():
     script, file_path = argv
@@ -124,4 +127,4 @@ def main():
         game_over,next_position = play(data,player,current_position,inventry,action)
         
         current_position = next_position
-main()
+#main()

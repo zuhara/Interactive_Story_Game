@@ -85,3 +85,9 @@ def test_play_action_take_object():
     game_over,next_position = game.play(data,player = 'new_player',current_position = 1,inventry = [],action = ['take','key'])
     assert game_over == False
     assert next_position == 1
+
+def test_user_action_exit():
+    data = game.read_data("./test_data/test_game.map")
+    a = game.user_action(data,player = "new_player",current_position = 1,inventry = [] ,command= 'exit')
+    e = ['exit']
+    assert a == e
