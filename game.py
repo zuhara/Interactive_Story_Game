@@ -91,6 +91,8 @@ Your Inventry : {}
     return status_msg
 
 def get_object(data,object,current_position,inventry):
+    " Returns the appended inventry 
+"
     available_objects = available_objects_in_room(data,current_position,inventry)
     if object in available_objects:
         inventry.append(object)
