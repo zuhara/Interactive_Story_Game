@@ -105,7 +105,20 @@ def user_input():
 
 def user_action(data,player,current_position,inventry,command):
     " Splits the user command and filters it "
-    return ['exit']
+    command_list = command.lower().split()
+    item_list = available_objects_in_room(data,current_position,inventry)
+    
+    if (command_list[0] == 'go') and (len(command_list) == 2) and (command_list[1] in ['north','south','east','west']) :
+        action = command_list
+    elif (command_list[0] == 'take') and (len(command_list) == 2) and (command_list[1] in item_list) :
+        action = command_list
+    elif command_list[0] in ['exit']:
+        action = command_list
+    else:
+        print("Its a Wrong command")
+        command = user_input()
+        action = user_action(data,player,current_position,inventry,command)
+    return action
 
 def main():
     script, file_path = argv

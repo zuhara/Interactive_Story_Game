@@ -91,3 +91,15 @@ def test_user_action_exit():
     a = game.user_action(data,player = "new_player",current_position = 1,inventry = [] ,command= 'exit')
     e = ['exit']
     assert a == e
+    
+def test_user_action_go():
+    data = game.read_data("./test_data/test_game.map")
+    a = game.user_action(data,player = "player2",current_position = 3,inventry = ['spoon', 'key', 'watch', 'knife', 'shovel', 'jug'] ,command= 'go north')
+    e = ['go','north']
+    assert a == e
+
+def test_user_action_take():
+    data = game.read_data("./test_data/test_game.map")
+    a = game.user_action(data,player = "new_player",current_position = 1,inventry = [] ,command= 'take key')
+    e = ['take','key']
+    assert a == e
