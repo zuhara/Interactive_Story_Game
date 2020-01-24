@@ -73,3 +73,15 @@ def test_get_object_right():
     a = game.get_object(data,object = "key",current_position = 1,inventry = [])
     e = ['key']
     assert a == e
+
+def test_get_object_wrong():
+    data = game.read_data("./test_data/test_game.map")
+    a = game.get_object(data,object = "spoon",current_position = 1,inventry = [])
+    e = []
+    assert a == e
+    
+def test_play_action_take_object():
+    data = game.read_data("./test_data/test_game.map")
+    game_over,next_position = game.play(data,player = 'new_player',current_position = 1,inventry = [],action = ['take','key'])
+    assert game_over == False
+    assert next_position == 1

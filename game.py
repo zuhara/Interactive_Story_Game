@@ -53,6 +53,12 @@ def play(data,player,current_position,inventry,action):
     elif action[0] == "exit":
         game_over = True
         next_position = current_position
+    elif action[0] == "take":
+        object = action[1]
+        inventry = get_object(data,object,current_position,inventry)
+        next_position = current_position
+        print(status_msg(data,next_position,inventry))
+        game_over = False
     else:
         print("Its a wrong command ")
         next_position = current_position
@@ -85,7 +91,12 @@ Your Inventry : {}
     return status_msg
 
 def get_object(data,object,current_position,inventry):
-    return ['key']
+    available_objects = available_objects_in_room(data,current_position,inventry)
+    if object in available_objects:
+        inventry.append(object)
+    else:
+        print("Wrong item ")
+    return inventry
 
 def user_input():
     command = input(">>>> ")
@@ -111,4 +122,4 @@ def main():
         game_over,next_position = play(data,player,current_position,inventry,action)
         
         current_position = next_position
-#main()
+main()
