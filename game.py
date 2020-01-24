@@ -1,5 +1,5 @@
 import ast
-
+from sys import argv
 #file_path = "./test_data/test_game.map"
 
 def read_data(file_path):
@@ -36,11 +36,17 @@ def navigate(data,current_position,direction):
 def play(data,player,current_position,inventry,action):
     if action[0] == "go":
         next_position,msg = navigate(data,current_position,action[1])
+        if msg == '':
+            print(status_msg(data,next_position,inventry))
+        else:
+            print(msg)
+            print(status_msg(data,next_position,inventry))
         game_over = False
     elif action[0] == "exit":
         game_over = True
         next_position = current_position
     else:
+        print("Its a wrong command ")
         next_position = current_position
         game_over = False
     return game_over,next_position
@@ -48,3 +54,44 @@ def play(data,player,current_position,inventry,action):
 def instruction(data):
     instruction = data['instructions']
     return instruction
+
+def available_objects_in_room(data,position,inventry):
+    objects_in_the_room = data['map'][position]['objects']
+    available_objects = list(set(objects_in_the_room)-set(inventry))
+    return available_objects
+
+def status_msg(data,position,inventry):
+    room = data['map'][position]['room']
+    available_objects = available_objects_in_room(data,position,inventry)
+    status_msg ="""
+You are now in the {}
+Available objects : {}
+Your Inventry : {} 
+""".format(room,available_objects,inventry)
+    return status_msg
+
+def user_input():
+    command = input(">>>> ")
+    return command
+
+def main():
+    script, file_path = argv
+    
+    data = read_data(file_path)
+
+    print(instruction(data))
+    
+    player = input("Enter your name: ")
+    
+    current_position,inventry = check_player(data,player)
+    
+    print(status_msg(data,current_position,inventry))
+
+    game_over = False
+    while not game_over:
+        action = user_input().split()
+        
+        game_over,next_position = play(data,player,current_position,inventry,action)
+        
+        current_position = next_position
+#main()
