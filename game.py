@@ -35,4 +35,10 @@ def navigate(data,current_position,direction):
     return next_position,msg
 
 def play(data,player,current_position,inventry,action):
-    return True , 3
+    if action[0] == "go":
+        next_position,msg = navigate(data,current_position,action[1])
+        game_over = False
+    elif action[0] == "exit":
+        game_over = True
+        next_position = current_position
+    return game_over,next_position
