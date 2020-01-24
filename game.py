@@ -123,7 +123,7 @@ def user_action(data,player,current_position,inventry,command):
         action = user_action(data,player,current_position,inventry,command)
     return action
 
-if __name__=='__main__':
+def main():
     script, file_path = argv
     
     data = read_data(file_path)
@@ -145,5 +145,6 @@ if __name__=='__main__':
         
         current_position = next_position
         
-
+if __name__=='__main__':
+    main()
     
