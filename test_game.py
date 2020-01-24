@@ -67,3 +67,9 @@ def test_instruction():
     a = game.instruction(data)
     e = '\n\n---------Instructions---------\n\nYou can move the directions  north  south  east  west \nif you want to navigate type the direction with the word go..... Eg  go north\nif you want to take somthing from the room type the object name with the word take....  Eg  take key \n\nif you want to exit the game type.... exit\n'
     assert a == e
+
+def test_get_object_right():
+    data = game.read_data("./test_data/test_game.map")
+    a = game.get_object(data,object = "key",current_position = 1,inventry = [])
+    e = ['key']
+    assert a == e

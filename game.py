@@ -38,6 +38,7 @@ def navigate(data,current_position,direction):
         msg = "Take another way" 
     return next_position,msg
 
+
 def play(data,player,current_position,inventry,action):
     " Return the status of Game and next position "
     
@@ -82,6 +83,9 @@ Available objects : {}
 Your Inventry : {} 
 """.format(room,available_objects,inventry)
     return status_msg
+
+def get_object(data,object,current_position,inventry):
+    return ['key']
 
 def user_input():
     command = input(">>>> ")
