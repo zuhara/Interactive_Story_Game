@@ -12,4 +12,13 @@ def read_data(file_path):
 
 
 def check_player(data,player):
-    return 1 , []
+    players = data['players']
+    if player in players :
+        current_position = data['players'][player][0]
+        inventry = data['players'][player][1]
+        print("Resuming the game")
+    else:
+        current_position = 1
+        inventry = []
+        print("You are a new player")
+    return current_position,inventry

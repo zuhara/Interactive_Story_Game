@@ -18,3 +18,10 @@ def test_check_player_new_player():
     a = game.check_player(data,player)
     e = 1 , []
     assert a == e
+
+def test_check_player_old_player():
+    data = game.read_data("./test_data/test_game.map")
+    player = "player2"
+    a = game.check_player(data,player)
+    e = 3 , ['spoon', 'key', 'watch', 'knife', 'shovel', 'jug']
+    assert a == e
