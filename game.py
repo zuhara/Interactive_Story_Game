@@ -30,8 +30,7 @@ def navigate(data,current_position,direction):
         msg = "" 
     else:
         next_position = current_position
-        msg = "Take another way"
-    
+        msg = "Take another way" 
     return next_position,msg
 
 def play(data,player,current_position,inventry,action):
@@ -41,4 +40,7 @@ def play(data,player,current_position,inventry,action):
     elif action[0] == "exit":
         game_over = True
         next_position = current_position
+    else:
+        next_position = current_position
+        game_over = False
     return game_over,next_position

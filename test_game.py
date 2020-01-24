@@ -55,3 +55,9 @@ def test_play_action_go_no_where():
     game_over,next_position = game.play(data,player="player2",current_position = 3,inventry = ['spoon', 'key', 'watch', 'knife', 'shovel', 'jug'],action = ['go','east'])
     assert game_over == False
     assert next_position == 3
+
+def test_play_wrong_command():
+    data = game.read_data("./test_data/test_game.map")
+    game_over,next_position = game.play(data,player="player2",current_position = 3,inventry = ['spoon', 'key', 'watch', 'knife', 'shovel', 'jug'],action = ['gonorth'])
+    assert game_over == False
+    assert next_position == 3
