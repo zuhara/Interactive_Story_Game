@@ -31,3 +31,9 @@ def test_navigate_to_a_direction():
     a,msg = game.navigate(data,current_position = 3,direction = "north")
     e = 1
     assert a == e
+
+def test_navigate_to_no_where():
+    data = game.read_data("./test_data/test_game.map")
+    a,msg = game.navigate(data,current_position = 2,direction = "north")
+    e = 2
+    assert a == e

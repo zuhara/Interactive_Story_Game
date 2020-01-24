@@ -24,4 +24,13 @@ def check_player(data,player):
     return current_position,inventry
 
 def navigate(data,current_position,direction):
-    return 1 , ''
+    map = data['map']
+    if map[current_position][direction] != 0:
+        next_position = map[current_position][direction]
+        msg = "" 
+    else:
+        next_position = current_position
+        msg = "Take another way"
+    
+    return next_position,msg
+
