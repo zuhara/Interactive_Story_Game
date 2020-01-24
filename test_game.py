@@ -37,3 +37,9 @@ def test_navigate_to_no_where():
     a,msg = game.navigate(data,current_position = 2,direction = "north")
     e = 2
     assert a == e
+
+def test_play_action_exit():
+    data = game.read_data("./test_data/test_game.map")
+    game_over,next_position = game.play(data,player="player2",current_position = 3,inventry = ['spoon', 'key', 'watch', 'knife', 'shovel', 'jug'],action = ['exit'])
+    assert game_over == True
+    assert next_position == 3

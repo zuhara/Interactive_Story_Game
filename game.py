@@ -34,3 +34,5 @@ def navigate(data,current_position,direction):
     
     return next_position,msg
 
+def play(data,player,current_position,inventry,action):
+    return True , 3
