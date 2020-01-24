@@ -3,6 +3,8 @@ from sys import argv
 #file_path = "./test_data/test_game.map"
 
 def read_data(file_path):
+    " Reads the data form the file path "
+    
     try:
         with open(file_path,'r') as f :
             data = ast.literal_eval(f.read())
@@ -12,6 +14,8 @@ def read_data(file_path):
 
 
 def check_player(data,player):
+    " Check wheather the player is a new player or not "
+    
     players = data['players']
     if player in players :
         current_position = data['players'][player][0]
@@ -24,6 +28,7 @@ def check_player(data,player):
     return current_position,inventry
 
 def navigate(data,current_position,direction):
+    " Returns the next position according to the user action "
     map = data['map']
     if map[current_position][direction] != 0:
         next_position = map[current_position][direction]
@@ -34,6 +39,8 @@ def navigate(data,current_position,direction):
     return next_position,msg
 
 def play(data,player,current_position,inventry,action):
+    " Return the status of Game and next position "
+    
     if action[0] == "go":
         next_position,msg = navigate(data,current_position,action[1])
         if msg == '':
@@ -52,15 +59,21 @@ def play(data,player,current_position,inventry,action):
     return game_over,next_position
 
 def instruction(data):
+    " Instructions of the map "
+    
     instruction = data['instructions']
     return instruction
 
 def available_objects_in_room(data,position,inventry):
+    " Returns available objects in the room "
+    
     objects_in_the_room = data['map'][position]['objects']
     available_objects = list(set(objects_in_the_room)-set(inventry))
     return available_objects
 
 def status_msg(data,position,inventry):
+    " Returns a msg which shows the current position,available objects and the items in the inventry of the player "
+    
     room = data['map'][position]['room']
     available_objects = available_objects_in_room(data,position,inventry)
     status_msg ="""
