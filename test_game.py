@@ -25,3 +25,9 @@ def test_check_player_old_player():
     a = game.check_player(data,player)
     e = 3 , ['spoon', 'key', 'watch', 'knife', 'shovel', 'jug']
     assert a == e
+
+def test_navigate_to_a_direction():
+    data = game.read_data("./test_data/test_game.map")
+    a,msg = game.navigate(data,current_position = 3,direction = "north")
+    e = 1
+    assert a == e

@@ -22,3 +22,6 @@ def check_player(data,player):
         inventry = []
         print("You are a new player")
     return current_position,inventry
+
+def navigate(data,current_position,direction):
+    return 1 , ''
