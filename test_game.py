@@ -61,3 +61,9 @@ def test_play_wrong_command():
     game_over,next_position = game.play(data,player="player2",current_position = 3,inventry = ['spoon', 'key', 'watch', 'knife', 'shovel', 'jug'],action = ['gonorth'])
     assert game_over == False
     assert next_position == 3
+
+def test_instruction():
+    data = game.read_data("./test_data/test_game.map")
+    a = game.instruction(data)
+    e = '\n\n---------Instructions---------\n\nYou can go the directions  north  south  east  west \nif you wana navigate type the direction with go..... Eg  go north\nif you wana take somthing from the room type the object name with the word -- take....  Eg  take key \n\nif you wana exit the game type ---- exit\n'
+    assert a == e

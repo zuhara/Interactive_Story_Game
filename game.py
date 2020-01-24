@@ -44,3 +44,7 @@ def play(data,player,current_position,inventry,action):
         next_position = current_position
         game_over = False
     return game_over,next_position
+
+def instruction(data):
+    instruction = data['instructions']
+    return instruction
