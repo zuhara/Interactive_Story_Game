@@ -11,3 +11,10 @@ def test_read_data_wrong_map():
     a = game.read_data(path)
     e = None
     assert a == e
+
+def test_check_player_new_player():
+    data = game.read_data("./test_data/test_game.map")
+    player = "new_player"
+    a = game.check_player(data,player)
+    e = 1 , []
+    assert a == e

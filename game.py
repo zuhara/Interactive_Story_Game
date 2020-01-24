@@ -11,4 +11,5 @@ def read_data(file_path):
         print("Wrong Map")
 
 
-#print(read_data(file_path))
+def check_player(data,player):
+    return 1 , []
