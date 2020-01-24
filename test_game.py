@@ -62,6 +62,12 @@ def test_play_wrong_command():
     assert game_over == False
     assert next_position == 3
 
+def test_play_action_take_object():
+    data = game.read_data("./test_data/test_game.map")
+    game_over,next_position = game.play(data,player = 'new_player',current_position = 1,inventry = [],action = ['take','key'])
+    assert game_over == False
+    assert next_position == 1
+
 def test_instruction():
     data = game.read_data("./test_data/test_game.map")
     a = game.instruction(data)
@@ -80,12 +86,6 @@ def test_get_object_wrong():
     e = []
     assert a == e
     
-def test_play_action_take_object():
-    data = game.read_data("./test_data/test_game.map")
-    game_over,next_position = game.play(data,player = 'new_player',current_position = 1,inventry = [],action = ['take','key'])
-    assert game_over == False
-    assert next_position == 1
-
 def test_user_action_exit():
     data = game.read_data("./test_data/test_game.map")
     a = game.user_action(data,player = "new_player",current_position = 1,inventry = [] ,command= 'exit')
@@ -103,3 +103,33 @@ def test_user_action_take():
     a = game.user_action(data,player = "new_player",current_position = 1,inventry = [] ,command= 'take key')
     e = ['take','key']
     assert a == e
+
+# def test_user_action_wrong_command():
+#     data = game.read_data("./test_data/test_game.map")
+#     a = game.user_action(data,player = "new_player",current_position = 1,inventry = [] ,command= '')
+#     e = ['take','key']
+#     assert a == e
+
+def test_save_yes_old_player():
+    data = game.read_data("./test_data/test_game.map")
+    a = game.save(data,current_position = 3,inventry = ['spoon', 'key', 'watch', 'knife', 'shovel', 'jug'] ,player = 'player2' , file_path = "./test_data/test_save_game.map" , action = 'y')
+    e = True
+    assert a == e
+
+def test_save_yes_new_player():
+    data = game.read_data("./test_data/test_game.map")
+    a = game.save(data,current_position = 3,inventry = ['spoon', 'key'] ,player = 'player3' , file_path = "./test_data/test_save_game.map" , action = 'y')
+    e = True
+    assert a == e
+
+def test_save_no():
+    data = game.read_data("./test_data/test_game.map")
+    a = game.save(data,current_position = 3,inventry = ['spoon', 'key', 'watch', 'knife', 'shovel', 'jug'] ,player = 'player2' , file_path = "./test_data/test_save_game.map" , action = 'n')
+    e = True
+    assert a == e
+
+# def test_save_wrong_action():
+#     data = game.read_data("./test_data/test_game.map")
+#     a = game.save(data,current_position = 3,inventry = ['spoon', 'key', 'watch', 'knife', 'shovel', 'jug'] ,player = 'player2' , file_path = "./test_data/test_save_game.map" , action = '')
+#     e = True
+#     assert a == e
