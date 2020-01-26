@@ -9,7 +9,8 @@ def read_data(file_path):
             data = ast.literal_eval(f.read())
             return data
     except FileNotFoundError:
-        print("Wrong Map")
+        print("\nWrong Map\n")
+        exit
 
 def instruction(data):
     " Instructions of the map "
@@ -24,11 +25,11 @@ def check_player(data,player):
     if player in players :
         current_position = data['players'][player][0]
         inventry = data['players'][player][1]
-        print("Resuming the game")
+        print("\nResuming the game...")
     else:
         current_position = 1
         inventry = []
-        print("You are a new player")
+        print("\nYou are a new player")
     return current_position,inventry
 
 def user_input():
@@ -41,7 +42,7 @@ def user_action(data,player,current_position,inventry,command):
     command_list = command.lower().split()
     item_list = available_objects_in_room(data,current_position,inventry)
     if not command_list:
-        print("Enter wrong command")
+        print("\nEntered a wrong command\n")
         command = user_input()
         action = user_action(data,player,current_position,inventry,command)
     elif (command_list[0] == 'go') and (len(command_list) == 2) and (command_list[1] in ['north','south','east','west']) :
@@ -51,7 +52,7 @@ def user_action(data,player,current_position,inventry,command):
     elif command_list[0] in ['exit']:
         action = command_list
     else:
-        print("Its a Wrong command")
+        print("\nIts a Wrong command\n")
         command = user_input()
         action = user_action(data,player,current_position,inventry,command)
     return action
@@ -82,7 +83,7 @@ def get_object(data,object,current_position,inventry):
     if object in available_objects:
         inventry.append(object)
     else:
-        print("Wrong item ")
+        print("\nWrong item\n")
     return inventry
 
 def navigate(data,current_position,direction):
@@ -94,7 +95,7 @@ def navigate(data,current_position,direction):
         msg = "" 
     else:
         next_position = current_position
-        msg = "Take another way" 
+        msg = "\nTake another way" 
     return next_position,msg
 
 
@@ -119,13 +120,13 @@ def play(data,player,current_position,inventry,action):
         print(status_msg(data,next_position,inventry))
         game_over = False
     else:
-        print("Its a wrong command ")
+        print("\nIts a wrong command\n")
         next_position = current_position
         game_over = False
     return game_over,next_position
 
 def save_or_not():
-    action = input("Do you wana save ? (y/n) ")
+    action = input("\nDo you wana save ? (y/n) ")
     return action
 
 def save(data,current_position,inventry,player,file_path,action):
@@ -144,15 +145,14 @@ def save(data,current_position,inventry,player,file_path,action):
             with open(file_path, 'w') as f: 
                 f.write(str(data))
                 f.close
-        print("Saved")
+        print("\nSaving....")
         game_over = True
     
     elif action == 'n':
-        print("Not Saved")
+        print("\nNot Saved")
         game_over = True
        
     else:
-        print("Wrong Command")
         action = save_or_not()
         game_over = save(data,current_position,inventry,player,file_path,action)
     return game_over
@@ -182,7 +182,7 @@ def main():
         
     action = save_or_not()
     save(data,current_position,inventry,player,file_path,action)
-    print("Game Over")
+    print("\nGame Over")
     
 if __name__=='__main__':
     main()
