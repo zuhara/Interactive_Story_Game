@@ -71,12 +71,15 @@ def status_msg(data,position,inventry):
     " Returns a msg which shows the current position,available objects and the items in the inventry of the player "
     
     room = data['map'][position]['room']
+    description = data['map'][position]['description']
     available_objects = available_objects_in_room(data,position,inventry)
     status_msg ="""
 You are now in the {}
+{}
+
 Available objects : {}
 Your Inventry : {} 
-""".format(room,available_objects,inventry)
+""".format(room,description,available_objects,inventry)
     return status_msg
 
 def available_objects_in_room(data,position,inventry):
