@@ -18,19 +18,29 @@ def instruction(data):
     instruction = data['instructions']
     return instruction
     
-def check_player(data,player):
-    " Check wheather the player is a new player or not "
-    
-    players = data['players']
-    if player in players :
+def resume_or_not():
+    action = input("Do you want to resume or play a new game? (resume/new) ")
+    return action
+
+def player_status(data,player,action):
+    " Returns the status of the player "
+        
+    if action == 'resume':
         current_position = data['players'][player][0]
         inventry = data['players'][player][1]
-        print("\nResuming the game...")
-    else:
+        print("\nResuming the game......")
+
+    elif action == 'new':
         current_position = 1
         inventry = []
         print("\nYou are a new player")
-    return current_position,inventry
+
+    else:
+        print("Its a Wrong command..")
+        action = resume_or_not()
+        current_position,inventry = player_status(data,player,action)
+   
+    return current_position,inventry    
 
 def user_input():
     command = input(">>>> ") 
@@ -166,8 +176,14 @@ def main():
     print(instruction(data))
     
     player = input("Enter your name: ")
+
+    players = data['players']
+    if player in players :
+        action = resume_or_not()
+    else:
+        action = 'new'
     
-    current_position,inventry = check_player(data,player)
+    current_position,inventry = player_status(data,player,action)
     
     print(status_msg(data,current_position,inventry))
 

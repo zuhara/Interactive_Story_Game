@@ -12,18 +12,25 @@ def test_read_data_wrong_map():
     e = None
     assert a == e
 
-def test_check_player_new_player():
+def test_player_status_new_player():
     data = game.read_data("./test_data/test_game.map")
     player = "new_player"
-    a = game.check_player(data,player)
+    a = game.player_status(data,player,action = 'new')
     e = 1 , []
     assert a == e
 
-def test_check_player_old_player():
+def test_player_status_old_player():
     data = game.read_data("./test_data/test_game.map")
     player = "player2"
-    a = game.check_player(data,player)
+    a = game.player_status(data,player,action = 'resume')
     e = 3 , ['spoon', 'key', 'watch', 'knife', 'shovel', 'jug']
+    assert a == e
+
+def test_player_status_old_player_new():
+    data = game.read_data("./test_data/test_game.map")
+    player = "player2"
+    a = game.player_status(data,player,action = 'new')
+    e = 1 , []
     assert a == e
 
 def test_navigate_to_a_direction():
