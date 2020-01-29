@@ -6,7 +6,7 @@ def read_data(file_path):
     
     try:
         with open(file_path,'r') as f :
-            data = ast.literal_eval(f.read())
+            data = ast.literal_eval(f.read()) # use JSON. Not literal_eval
             return data
     except FileNotFoundError:
         print("\nWrong Map\n")
